@@ -4,9 +4,9 @@ This subfolder contains content of everything related to [The Modern JavaScript 
 
 The guide splits into three parts:
 
- 1. [The JavaScript Language](),
- 2. [Browser: Document, Events, Interfaces](), and
- 3. [Additional Articles]().
+ 1. [The JavaScript Language](https://github.com/DDublue/sandbox/tree/main/modern-js/part-1),
+ 2. [Browser: Document, Events, Interfaces](https://github.com/DDublue/sandbox/tree/main/modern-js/part-2), and
+ 3. [Additional Articles](https://github.com/DDublue/sandbox/tree/main/modern-js/part-3).
 
 ## Part 1: The JavaScript Language
 
