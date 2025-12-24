@@ -70,6 +70,6 @@ Browsers have embedded developer tools that developers find useful. Chrome and F
 
 Pressing `F12` in [here](https://javascript.info/article/devtools/bug.html) and going to the console, it should look like this (for Chrome): 
 
-![alt text](assets/img/image.png)
+![alt text](assets/img/bug.png)
 
 Other browsers should be similar.
