@@ -1,6 +1,6 @@
 # An Introduction
 
-Notes, links, etc. for part 1 section 1.
+Notes, links, etc. for part 1 section 1. All about JavaScript lore and nuances.
 
 ## 1.1 An Introduction to JavaScript
 

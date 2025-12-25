@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    
+    <p>Demo hello demo world!</p>
+
+    <p>Before the script...</p>
+
+    <script>
+      alert("Hello, world!");
+    </script>
+
+    <p>...After the script.</p>
+
+    <!-- Non-modern -->
+    <script type="text/javascript"> alert("ancient"); </script>
+    <p>ANCIENT</p>
+
+    <!-- External -->
+    <script src="./js/helloworld.js"></script>
+    <p>External</p>
+
+    <!-- URL to script (online example) -->
+    <p>loading libraries...</p>
+    <script src="code.jquery.com"></script>
+    <p>libraries loaded!</p>
+
+    <!-- Only the 'src' will run -->
+    <script src="./js/helloworld.js">
+      alert("this won't work");
+    </script>
+
+  </body>
+</html>
