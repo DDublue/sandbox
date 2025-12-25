@@ -118,3 +118,7 @@ Nested comments do not work:
 */
 alert("World");
 ```
+
+## 2.3 The Modern Mode, "use strict"
+
+Before 2009, JavaScript 
