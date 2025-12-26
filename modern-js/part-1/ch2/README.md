@@ -121,4 +121,15 @@ alert("World");
 
 ## 2.3 The Modern Mode, "use strict"
 
-Before 2009, JavaScript 
+Before 2009, JavaScript was able to grow with new features without destroying old ones. But that made any imperfect feature stuck in the language forever.
+
+In 2009, ECMAScript 5 (ES5) was released which added new features and modified some of the existing ones. They are enabled using `use strict` at the top of JS scripts:
+
+```js
+"use strict";
+
+// this code works the modern way
+...
+```
+
+## 2.4 Variables
