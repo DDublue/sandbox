@@ -133,3 +133,127 @@ In 2009, ECMAScript 5 (ES5) was released which added new features and modified s
 ```
 
 ## 2.4 Variables
+
+Variables is a "named storage" for data. We use `let` to declare variables in JavaScript:
+
+```js
+let message; // declare it
+
+message = "Hello!"; // then assign it data
+```
+
+There are multiple ways to declare variables:
+
+```js
+let message = "Hello!"; // declare and assign at the same time
+
+let user = "John", age = 25; // multiple variables in one line
+
+let user2 = "Mary",
+  age2 = 25; // this works
+
+let user3 = "Doe"
+  , age3 = 25; // and this too
+```
+
+You can also declare variables using `var` instead of `let`, but it's the old version. There are subtle differences between them.
+
+Only declare variables once, not twice. Otherwise, it is an error:
+
+```js
+let message = "This";
+
+let message = "That"; // SyntaxError: 'message' has already been declared
+```
+
+### Variable Naming
+
+Limitations
+
+- The name can only have letters, digits, `$`, or `_`.
+- The first character cannot be a digit.
+
+```js
+let userName;
+let test123;
+let $ = 1;
+let _ = 2; // these work
+
+let 3four;
+let hello-world; // but these don't
+```
+
+Cases also matter. `apple` is different from `APPLE`.
+
+There are also reserved names; these are used as keywords in JavaScript. Some examples include `let`, `class`, `return`, and `function`.
+
+```js
+let let = 5; // error
+```
+
+Without `use strict`, variables can be declared without `let` or `var`. But with it, it would be an error.
+
+```js
+"use strict";
+
+num = 5; // error: num is not defined
+```
+
+### Constants
+
+Using `const` instead of `let` makes the variable unchangeable:
+
+```js
+const myBirthday = "18.04.1982";
+```
+
+Trying to change a `const` variable will cause an error. Programmers use it to tell that it is a variable that will never change.
+
+### Naming Practices
+
+Some rules to follow are:
+
+- Use human-readable names like `userName` or `shoppingCart`.
+- Limit use of abbreviatios or short names like `a` or `b` unless it's simple.
+- Make names descriptive and concise.
+- Make related variables name-related like `newUser` and `currentUser`.
+
+### Exercises
+
+*(Note: these are verbatim from the website)*
+
+**Working with Variables**
+
+- Declare two variables: `admin` and `name`.
+- Assign the value `"John"` to `name`.
+- Copy the value from `name` to `admin`.
+- Show the value of `admin` using `alert` (which should output "John").
+
+**Giving the right name**
+
+- Create a variable with the name of our planet. How would you ame such a variable?
+- Create a variable to store the name of a current visitor to a website. How would you name that variables?
+
+**Uppercase const?**
+
+Look at this code:
+
+```js
+const birthday = '18.04.1982';
+
+const age = someCode(birthday);
+```
+
+Here we have a constant `birthday` for the date, and also the `age` constant.
+
+The `age` is calculated from `birthday` using `someCode()`, which means a function call that we didn’t explain yet (we will soon!), but the details don’t matter here, the point is that `age` is calculated somehow based on the `birthday`.
+
+Would it be right to use upper case for `birthday`? For `age`? Or even for both?
+
+```js
+const BIRTHDAY = '18.04.1982'; // make birthday uppercase?
+
+const AGE = someCode(BIRTHDAY); // make age uppercase?
+solution
+```
+### Related Files
