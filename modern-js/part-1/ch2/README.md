@@ -54,6 +54,8 @@ The main rule for scripts is to put more complex ones in separate files, very si
 - helloworld.html
 - imjavascript.html
 - imjavascript2.html
+- js/helloworld.js
+- js/alert.js
 
 ## 2.2 Code Structure
 
@@ -119,6 +121,10 @@ Nested comments do not work:
 alert("World");
 ```
 
+### Related Files
+
+- js/structure.js
+
 ## 2.3 The Modern Mode, "use strict"
 
 Before 2009, JavaScript was able to grow with new features without destroying old ones. But that made any imperfect feature stuck in the language forever.
@@ -131,6 +137,10 @@ In 2009, ECMAScript 5 (ES5) was released which added new features and modified s
 // this code works the modern way
 ...
 ```
+
+### Related Files
+
+- js/usestrict.js
 
 ## 2.4 Variables
 
@@ -256,4 +266,7 @@ const BIRTHDAY = '18.04.1982'; // make birthday uppercase?
 const AGE = someCode(BIRTHDAY); // make age uppercase?
 solution
 ```
+
 ### Related Files
+
+- js/variables.js
