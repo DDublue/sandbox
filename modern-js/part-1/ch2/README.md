@@ -270,3 +270,226 @@ solution
 ### Related Files
 
 - js/variables.js
+
+## 2.5 Data Types
+
+JavaScript has eight basic data types:
+
+- `number`
+- `bigint`
+- `string`
+- `boolean`
+- `null`
+- `undefined`
+- `symbol`
+- `object`
+
+JavaScript is *dynamically typed*, meaning its variables are not bound by a specific data type (use TypeScript for that).
+
+```js
+let message = "hello";
+message = 123456; // was a string, now a number
+```
+
+### Number
+
+The `number` type include integer and floating point numbers.
+
+```js
+let n = 123;
+n = 12.345;
+```
+
+Numbers can perform math operations like `*`, `/`, `+`, and `-`.
+
+There are also special `number` values: `Infinity`, `-Infinity`, and `NaN`.
+
+We can get `Infinity` through division by zero or directly:
+
+```js
+alert( 1 / 0 ); // Infinity
+
+alert( Infinity ); // Infinity
+```
+
+`NaN` represents a computational error, as a result of an incorrect or an undefined math operation. It is also sticky (any futher math operation on `NaN` returns `NaN`):
+
+```js
+alert ( "not a number" / 2 ); // NaN
+alert ( NaN + 1 ); // NaN
+alert ( 3 * NaN ); // NaN
+alert ( "not a number" / 2 - 1 ) // NaN
+```
+
+Only exception is `NaN ** 0 = 1`. Regardless, any math is "safe" in JavaScript. The worst the script can result in is `NaN`.
+
+### BigInt
+
+The `number` type cannot represent integers larger than `(2^53-1)`, or less than `-(2^53)`
+for negatives.
+
+So, `BigInt` is used to represent these larger numbers, by appending `n` at the end:
+
+```js
+const bigInt = 123456789012345678901234567890123456789012345678901234567890n;
+```
+
+`BigInt` are seldom used, like in cryptography or microsecond-precision timestamps.
+
+### String
+
+JavaScript strings is surrounded by quotes, either: double quotes, single quotes, or backticks:
+
+```js
+let str1 = "Hello";
+let str2 = 'World';
+let str3 = `I wanted to say ${str1} ${str2}!`;
+```
+
+Double quotes and single quotes behave the same, but backticks allow for `${...}` to be used to embed variables/expressions.
+
+### Boolean (logical type)
+
+Booleans can either be `true` or `false`. They can also come as a result of comparisons:
+
+```js
+let isCurrentUser = true;
+let isOlderThan67 = false;
+
+let isGreater = 6 > 7;
+alert ( isGreater ); // false
+```
+
+### "null" value
+
+`null` is a special value that does not belong to any of the types above. It essentially means "nothing", "empty" or "value unknown".
+
+Below means `age` is unknown:
+
+```js
+let age = null;
+```
+
+### "undefined" value
+
+The `undefined` type is similar to `null`, but it means that a "value is not assigned", not nothing/unknown.
+
+```js
+
+let age;
+alert(age); // shows "undefined"
+
+age = 100;
+alert(age); // age = 100
+
+age = undefined;
+alert(age); // shows "undefined" again
+```
+
+`undefined` can be assigned but not recommended. `null` is normally used to show empty values, while `undefined` is for default initial values for unassigned things.
+
+### Objects and Symbols
+
+The `object` is different from the other "primitive" types because they contain only a single value. `object` types can contain multiple values.
+
+The `symbol` type is use to create unique identifiers for objects.
+
+### typeof Operator
+
+The `typeof` operator returns the type of the operand, useful for processing values of different types differently or just want to check it.
+
+```js
+typeof undefined // "undefined"
+
+typeof 0 // "number"
+
+typeof 10n // "bigint"
+
+typeof true // "boolean"
+
+typeof "foo" // "string"
+
+typeof Symbol("id") // "symbol"
+
+typeof Math // "object": Math is a built-in object for more math operations
+
+typeof null // "object": this was an error back then and kept for compatibility; it is clearly not an "object"
+
+typeof alert // "function": alert is a function
+```
+
+`typeof` can also be written as `typeof(x)`. It is an operator, not a function.
+
+### Exercises
+
+**String quotes**
+
+*(Note: these are verbatim from the website)*
+
+What is the output of the script?
+
+```js
+let name = "Ilya";
+
+alert( `hello ${1}` ); // ?
+
+alert( `hello ${"name"}` ); // ?
+
+alert( `hello ${name}` ); // ?
+```
+
+### Related Files
+
+- js/datatypes.js
+- datatypes.html
+
+## 2.6 Interaction: alert, prompt, confirm
+
+Some functions for user interaction include `alert`, `prompt`, and `confirm`.
+
+### alert
+
+This function (as seen earlier) shows a message and waits for the user to press "OK".
+
+```js
+alert("Hello");
+```
+
+The small window is called a *modal* window, meaning the user can't interact with the rest of the page, press other buttons, etc., until they have dealt with the window.
+
+### prompt
+
+The function `prompt` accepts two arguments: `title` as text to show the user, and `default` as the initial value for the input field.
+
+```js
+result = prompt(title, [default]);
+```
+
+A modal window pops up with a text message, an input field, and buttons OK/Cancel. If the user presses OK, `result` will get it. Otherwise, the user can press Cancel or hit the `esc` key to get `null` as the result.
+
+It is recommended to always set a default value.
+
+### confirm
+
+The function `confirm` shows a modal window with a question and two buttons: OK and Cancel. If OK is pressed, then the result is `true` and `false` otherwise.
+
+```js
+let result = confirm(question);
+
+let isBoss = confirm("Are you the boss?");
+
+alert ( isBoss ) // true if OK is pressed;
+```
+
+### Exercises
+
+*(Note: these are verbatim from the website)*
+
+**A Simple Page**
+
+- Create a web-page that asks for a name and outputs it.
+
+### Related Files
+
+- interactions.html
+- js/prompt.js
