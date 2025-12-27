@@ -232,14 +232,14 @@ Some rules to follow are:
 
 *(Note: these are verbatim from the website)*
 
-**Working with Variables**
+#### Working with Variables
 
 - Declare two variables: `admin` and `name`.
 - Assign the value `"John"` to `name`.
 - Copy the value from `name` to `admin`.
 - Show the value of `admin` using `alert` (which should output "John").
 
-**Giving the right name**
+#### Giving the right name
 
 - Create a variable with the name of our planet. How would you ame such a variable?
 - Create a variable to store the name of a current visitor to a website. How would you name that variables?
@@ -485,7 +485,7 @@ alert ( isBoss ) // true if OK is pressed;
 
 *(Note: these are verbatim from the website)*
 
-**A Simple Page**
+#### A Simple Page
 
 - Create a web-page that asks for a name and outputs it.
 
@@ -493,3 +493,344 @@ alert ( isBoss ) // true if OK is pressed;
 
 - interactions.html
 - js/prompt.js
+
+## 2.7 Type Conversions
+
+Usually, operators and functions automatically convert values to the right type, e.g. `alert` already converts any value to a string to show it.
+
+### String Conversion
+
+This occurs when we output something, done with `String(value)`.
+
+```js
+let value = false;
+alert (typeof value); // boolean
+
+value = String(value);
+alert (typeof value); // string
+```
+
+### Numeric Conversion
+
+This occurs in math operations, done with `Number(value)`. The rules are:
+
+- if `undefined`, then `Number(undefined)` becomes `NaN`.
+- if `null`, then `Number(null)` becomes `0`.
+- if `true/false`, then `Number(true)` becomes `1` and `Number(false)` becomes `0`.
+- if `string`, then it is read "as is" and whitespace from both sides are ignored. An empty string becomes `0`, and an error gives `NaN`.
+
+```js
+alert( "6" / "2" ); // 3, strings are converted to numbers
+
+let str = "123";
+alert(typeof str); // string
+
+let num = Number(str); // becomes a number 123
+alert(typeof num); // num
+```
+
+### Boolean Conversion
+
+This occurs in logical operations, done with `Boolean(value)`. The rules are:
+
+- if `0`, `null`, `undefined`, `NaN`, or `""`, then `Boolean(...)` becomes `false`.
+- if it is any other value, then `Boolean(...)` becomes `true`.
+
+```js
+alert( Boolean("0") ); // true
+alert( Boolean(" ") ); // also true
+```
+
+## 2.8 Basic Operators, Maths
+
+There are the simple math operations like addition and multiplication, but JavaScript also includes more specific operations.
+
+### Unary, Binary, Operand
+
+*Operand* - what we apply operators to. `5 * 2` has a left operand `5` and a right operand `2`. They can also be called "arguments".
+
+*Unary* - an operator with a single operand.
+
+```js
+let x = 1;
+
+x = -x; // -1, unary negation was applied
+```
+
+*Binary* - an operator with two operands.
+
+```js
+let x = 1, y = 3;
+alert( y - x ); // 2
+```
+
+### Maths
+
+The supported math operations are:
+
+- Addition `+`,
+- Subtraction `-`,
+- Multiplication `*`,
+- Division `/`,
+- Remainder `%`,
+- Exponentiation `**`.
+
+#### Remainder %
+
+This operator is the *remainder* of the integer division of `a` by `b`. It is not related to percents.
+
+```js
+alert( 5 % 2 ); // 1
+alert( 8 % 3 ); // 2
+alert( 8 % 4 ); // 0
+```
+
+#### Exponentiation **
+
+This operator raises `a` to the power of `b`.
+
+```js
+alert( 2 ** 2 ) // 2**2 = 4
+alert( 2 ** 3 ) // 2**3 = 8
+alert( 4 ** (1/2) ) // 2
+alert( 8 ** (1/3) ) // 2
+```
+
+### String Concatenation w/Binary +
+
+When `+` is used on strings, it merges them:
+
+```js
+let s = "my" + "string";
+alert(s); // mystring
+```
+
+It will convert non-strings to strings if one of the operands is a string. If there's more than two operands, it will add them from left to right:
+
+```js
+alert( '1' + 2 ); // "12"
+alert ('1' + 2 + 2 ) // "122" and not "14"
+```
+
+It is *not* the same with subtraction and division:
+
+```js
+alert( 6 - '2' ); // 4
+alert ( '6' / '2' ); // 3
+```
+
+### Numeric Conversion, Unary +
+
+When `+` is applied to a single value, it does nothing to numbers. However, it will convert non-numbers to numbers.
+
+```js
+let x = 1;
+alert( +x ); // 1
+
+let y = -2;
+alert( +y ); // -2
+
+alert( +true ); // 1
+alert( +"" ); // 0
+```
+
+Sometimes, we'll have to convert strings to numbers before "operating" them, e.g. HTML form fields as strings.
+
+```js
+let apples = "2";
+let oranges = "3";
+
+alert( apples + oranges ); // "23"
+
+alert( +apples + +oranges ); // 5
+// this also works: alert( Number(apples) + Numbers(oranges) ); // 5
+```
+
+### Operator Precedence
+
+"PEMDAS" applies here, but it's also important to note that unary operators have higher precedence (than binary operators) and assignment has lower precedence (than binary operators).
+
+### Assignment
+
+Assignment `=` is also an operator.
+
+```js
+let x = 2 * 2 + 1;
+alert( x ); // 5
+```
+
+It also returns a value: `x = value` writes the `value` into `x` then returns it. It is not recommended to write like this:
+
+```js
+let a = 1;
+let b = 2;
+
+let c = 3 - (a = b + 1);
+
+alert( a ); // 3
+alert( c ); // 0
+```
+
+#### Chaining Assignments
+
+Assignments can be chained where it is evaluated from right to left:
+
+```js
+let a, b, c;
+
+a = b = c = 2 + 2;
+
+alert( a ); // 4
+alert( b ); // 4
+alert( c ); // 4
+```
+
+But due to readability, it's better to split it:
+
+```js
+c = 2 + 2;
+b = c;
+a = c;
+```
+
+### Modify-in-place
+
+We can modify the same variable with `+=`, `-=`, etc. for all arithmetical and bitwise operators.
+
+```js
+let n = 2;
+n += 5; // n = 7
+n *= 2; // n = 14
+
+alert( n ); // 14
+
+n * = 1 + 2; // 1 + 2 = 3 * n = 42
+```
+
+### Increment/decrement
+
+There are special operators for incrementing and decrementing (variables only):
+
+```js
+let counter = 2;
+
+counter++; // adds 1 to counter
+alert( counter ); // 3
+
+counter--; // subtracts 1 to counter
+alert( counter ); // 2
+```
+
+`++` and `--` can be placed before or after a variable.
+
+- `counter++` means it is in "postfix form"
+- `++counter` means it is in "prefix form"
+
+The difference is noticed when we use the returned value:
+
+```js
+let counter = 1;
+let a = ++counter; // a = 2; 'counter' is incremented, then 'a' is assigned the value of 'counter'
+
+counter = 1;
+a = counter++; // a = 1; value of 'a' is 'counter', then we increment 'counter'
+```
+
+Its precedence is higher than most operations.
+
+### Bitwise Operators
+
+There are bitwise operators that work on the level of numbers' binary representation, not specific to JavaScript:
+
+- AND ( `&` )
+- OR ( `|` )
+- XOR ( `^` )
+- NOT ( `~` )
+- LEFT SHIFT ( `<<` )
+- RIGHT SHIFT ( `>>` )
+- ZERO-FILL RIGHT SHIFT ( `>>>` )
+
+### Comma
+
+This is one of the rarest operators. It is used to evaluate several expressions, but only the result of the last one is returned.
+
+```js
+let a = (1 + 2, 3 + 4);
+
+alert( a ); // 7 (the result of 3 + 4)
+```
+
+Here is a good example:
+
+```js
+for (a = 1, b = 3, c = a * b; a < 10; a++) {
+  ...
+}
+```
+
+Above, the first two expressions won't be used anyways outside of the comma, but it is still used within for `c`.
+
+### Exercises
+
+#### The postfix and prefix forms
+
+What are the final values of all variables `a`, `b`, `c`, and `d` after code below?
+
+```js
+let a = 1, b = 1;
+
+let c = ++a; // ?
+let d = b++; // ?
+```
+
+#### Assignment Result
+
+What are the values `a` and `x` after code below?
+
+```js
+let a = 2;
+
+let x = 1 + (a *= 2);
+```
+
+#### Type Conversions
+
+What are results of these expressions?
+
+```js
+"" + 1 + 0
+"" - 1 + 0
+true + false
+6 / "3"
+"2" * "3"
+4 + 5 + "px"
+"$" + 4 + 5
+"4" - 2
+"4px" - 2
+"  -9  " + 5
+"  -9  " - 5
+null + 1
+undefined + 1
+" \t \n" - 2
+```
+
+#### Fix the Addition
+
+Here’s a code that asks the user for two numbers and shows their sum.
+
+It works incorrectly. The output in the example below is 12 (for default prompt values).
+
+Why? Fix it. The result should be 3.
+
+```js
+let a = prompt("First number?", 1);
+let b = prompt("Second number?", 2);
+
+alert(a + b); // 12
+```
+
+### Related Files
+
+- js/mathops.js
+
+## 2.9 Comparisons
