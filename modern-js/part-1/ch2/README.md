@@ -834,3 +834,42 @@ alert(a + b); // 12
 - js/mathops.js
 
 ## 2.9 Comparisons
+
+There are math comparison operators available in JavaScript:
+
+- Greater/less than: `a > b`, `a < b`.
+- Greater/less than or equals: `a >= b`, `a <= b`.
+- Equals: `a == b` (note two `=`'s).
+- Not equals: `a != b`.
+
+### Boolean is the Result
+
+All comparison operators return a boolean value:
+
+- `true` - means "yes", "correct" or "the truth".
+- `false` - means "no", "wrong" or "not the truth".
+
+```js
+alert( 2 > 1 ); // true 
+```
+
+### String Comparison
+
+
+
+### Comparison of Different Types
+
+
+### Strict Equality
+
+
+### Comparison w/null and undefined
+
+
+### Exercises
+
+
+### Related Files
+
+
+## 2.10 ...
