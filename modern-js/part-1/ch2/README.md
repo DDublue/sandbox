@@ -844,32 +844,126 @@ There are math comparison operators available in JavaScript:
 
 ### Boolean is the Result
 
-All comparison operators return a boolean value:
+All comparison operators return a boolean value, which can also be stored:
 
 - `true` - means "yes", "correct" or "the truth".
 - `false` - means "no", "wrong" or "not the truth".
 
 ```js
-alert( 2 > 1 ); // true 
+alert( 2 > 1 ); // true (correct)
+alert( 2 == 1 ); // false (wrong)
+alert( 2 != 1 ); // true (correct)
+
+let result = 5 > 4;
+alert( result ); // true
 ```
 
 ### String Comparison
 
+Strings are compared letter-by-letter, lexicographically.
 
+```js
+alert( 'Z' > 'A' ); // true
+alert( 'Glow' > 'Glee' ); // true
+alert( 'Bee' > 'Be' ); // true
+```
+
+For two strings `A` and `B`:
+
+1. Compare the first character of `A` and `B`.
+2. If the `A`'s first character is `>`/`<` than `B`'s, then `A` is `>`/`<` than `B`.
+3. Otherwise, they are the same, so we compare the next.
+4. Repeat until the end of either string.
+5. If both strings end at the same length, then they are equal. Otherwise, the longer string is greater.
 
 ### Comparison of Different Types
 
+JavaScript converts values to numbers for different types:
+
+```js
+alert( "2" > 1 ); // true, '2' becomes 2
+alert( "01" == 1 ); // true, '01' becomes 1
+
+alert ( true == 1 ); // true
+alert ( false == 0 ); // true
+```
+
+It is possible to have two equal values but they have different boolean values,
+which is due to different `Boolean` conversion rules:
+
+```js
+let a = 0;
+alert( Boolean(a) ); // false
+
+let b = "0";
+alert( Boolean(b) ); // true
+
+alert(a == b); // true
+```
 
 ### Strict Equality
 
+`===` is used for strict equality **without type conversion**, because `==` will do that first before checking:
+
+```js
+alert( 0 == false ); // true
+alert( '' == false ); // true
+
+alert( 0 === false ); // false, because types are different
+```
+
+Strict non-equality is `!==`.
 
 ### Comparison w/null and undefined
 
+With `null` or `undefined`, it's different behavior.
+
+```js
+alert( null === undefined ); // false, because different types
+
+alert( null == undefined ); // true, because special rule
+```
+
+Here's `null` compared with zero:
+
+```js
+alert( null > 0 ); // (1) false
+alert( null == 0 ); // (2) false
+alert( null >= 0 ); // (3) true
+```
+
+Comparisons e.g `>=/>` will convert `null` to 0, whereas `==` will not. That's why (3) is `true` but (2) is not.
+
+Here is `undefined` compared with zero:
+
+```js
+alert( undefined > 0 ); // (1) false
+alert( undefined < 0 ); // (2) false
+alert( undefined == 0 ); // (3) false
+```
+
+(1) and (2) convert `undefined` to `NaN`, which returns false for all comparisons. (3) only equals `null`, `undefined`, and no other value.
+
+If a variable may be `null/undefined`, it is better to check for them separately instead of using comparisons.
 
 ### Exercises
 
+#### Comparisons
+
+What will be the result for these expressions?
+
+```js
+5 > 4
+"apple" > "pineapple"
+"2" > "12"
+undefined == null
+undefined === null
+null == "\n0\n"
+null === +"\n0\n"
+```
 
 ### Related Files
 
+- js/comparisons.js
 
 ## 2.10 ...
