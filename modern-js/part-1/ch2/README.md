@@ -966,4 +966,185 @@ null === +"\n0\n"
 
 - js/comparisons.js
 
-## 2.10 ...
+## 2.10 Conditional Branching: if, '?'
+
+### The "if" Statement
+
+`if(...)` evaluates the condition in parentheses and executes the code block if `true`.
+
+```js
+if (year == 2015) alert( "You are right!" ); // Basic syntax
+
+if (year == 2015) { // Allows >1 statements + more readable
+  alert( "That's so correct!" );
+  alert( "You're so smart!" );
+}
+```
+
+### Boolean Conversion
+
+The `if` statement will convert its expression into a boolean result.
+
+```js
+if (0) { ... } // 0 is falsy; will always fail
+
+if (1) { ... } // 1 is truthy; will always pass
+
+let cond = (year == 2015);
+if (cond) { ... }; // can pass a pre-evaluated boolean as well
+```
+
+### The "else" Clause
+
+An `if` statement can have an optional `else` block which executes when the condition is falsy.
+
+```js
+let a = 10, b = 0;
+
+if (b > a) { // 0 > 10 ?
+  ...
+} else { // triggers
+  ...
+}
+```
+
+### Several Conditions: "else if"
+
+A `if` statement can have multiple conditions to check, using `else if`:
+
+```js
+let a = 10, b = 0, c = -55;
+
+if (a > 99) {
+  alert( "Wrong!" );
+} else if (a > b) {
+  alert( "Right!" );
+} else {
+  alert( "idk bro" );
+}
+```
+
+### Conditional Operator '?'
+
+There is a simpler way to assign a variable based on a yes/no condition, using `?`. It is also called a *ternary* since the expressions takes three operands. Here is the formula:
+
+```js
+let result = condition ? value1 : value2;
+```
+
+```js
+let accessAllowed;
+let age = 19;
+
+// 'if' method
+if (age > 18) {
+  accessAllowed = true;
+} else {
+  accessAllowed = false;
+}
+
+alert(accessAllowed);
+
+// ternary method
+accessAllowed = age > 18 ? true : false;
+```
+
+`?` has lower precedence, so we can omit the parentheses (if we want).
+
+### Multiple '?'
+
+Multiple `?`'s can be used, similar to multiple `else if` statements:
+
+```js
+let age = prompt('age?', 18);
+
+let message = (age < 3) ? 'Hi, baby!' :
+  (age < 18) ? 'Hello!' :
+  (age < 100) ? 'Greetings!' :
+  'What an unusual age!';
+
+alert( message );
+```
+
+### Non-traditional Use of '?'
+
+Sometimes, `?` can be used to replace `if`:
+
+```js
+let company = prompt('Which company created JavaScript?', '');
+
+(company == 'Netscape') ?
+   alert('Right!') : alert('Wrong.');
+```
+
+Instead of assigning a value to a variable, we execute a statement based on the condition. However, it is not recommended to do it like this.
+
+### Exercises
+
+#### if (a string with zero)
+
+Will `alert` be shown?
+
+```js
+if ("0") {
+  alert( 'Hello' );
+}
+```
+
+#### The name of JavaScript
+
+Using the `if..else` construct, write the code which asks: "What is the *official* name of JavaScript?"
+
+If the visitor enters *ECMAScript*, then output "Right!", otherwise - output: "You don't know? ECMAScript!"
+
+![alt text](assets/img/ifdiagram.png)
+
+#### Show the Sign
+
+Using `if..else`, write the code which gets a number via `prompt` and then shows in `alert`:
+
+- `1`, if the value is greater than zero,
+- `-1`, if less than zero,
+- `0`, if equals zero.
+
+In this task we assume that the input is always a number.
+
+#### Rewrite 'if' into '?'
+
+Rewrite this `if` using the conditional operator `'?'`:
+
+```js
+let result;
+
+if (a + b < 4) {
+  result = 'Below';
+} else {
+  result = 'Over';
+}
+```
+
+#### Rewrite 'if..else' into '?'
+
+Rewrite `if..else` using multiple ternary operators `'?'`.
+
+For readability, it’s recommended to split the code into multiple lines.
+
+```js
+let message;
+
+if (login == 'Employee') {
+  message = 'Hello';
+} else if (login == 'Director') {
+  message = 'Greetings';
+} else if (login == '') {
+  message = 'No login';
+} else {
+  message = '';
+}
+```
+
+### Related Files
+
+- js/conditionals.js
+
+## 2.11
