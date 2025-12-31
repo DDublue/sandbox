@@ -1146,5 +1146,22 @@ if (login == 'Employee') {
 ### Related Files
 
 - js/conditionals.js
+- conditionals.html
 
-## 2.11
+## 2.11 Logical Operators
+
+JavaScript has four logical operators: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing).
+
+### || (OR)
+
+
+
+### Exercises
+
+
+
+### Related Files
+
+
+
+## 2.12 Nullish Coalescing Operator '??'
