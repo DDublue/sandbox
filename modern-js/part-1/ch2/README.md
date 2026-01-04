@@ -1154,14 +1154,179 @@ JavaScript has four logical operators: `||` (OR), `&&` (AND), `!` (NOT), `??` (N
 
 ### || (OR)
 
+In an expression with an `||` (OR), if any arguments are true, then the expression returns true, otherwise false.
+It is meant to manipulate boolean values only, so non-boolean values are converted first into boolean.
 
+```js
+let a = true, b = false;
+let result = a || b; // true
+
+// Four possible logical combinations
+alert( true || true );   // true
+alert( false || true );  // true
+alert( true || false );  // true
+alert( false || false ); // false
+
+if (1 || 0) { // similar to if( true || false )
+  alert( "truthy!" );
+}
+```
+
+The OR `||` operator also finds the first truthy value. If none of the values are truthy, it returns the last value.
+
+```js
+let firstName = "";
+let lastName = "";
+let nickName = "SuperCoder";
+
+alert( firstName || lastName || nickName || "Anonymous" );
+// If nickName was falsy, then 'Anonymous' would be chosen
+```
+
+It is also useful for short-circuit evaluation:
+
+```js
+true || alert("not printed");
+false || alert("printed");
+```
+
+### && (AND)
+
+In an expression with an `&&` (AND), if all arguments all true, then the expression returns true, otherwise false.
+
+```js
+let a = true, b = true;
+let result = a && b; // true
+
+// Four possible logical combinations
+alert( true && true );   // true
+alert( false && true );  // false
+alert( true && false );  // false
+alert( false && false ); // false
+
+if (1 && 0) { // 'true' && 'false'
+  alert( "won't work, because the result is falsy" );
+}
+```
+
+The AND `&&` operator also finds the first falsy value. If none of the values are falsy, it returns the last value.
+
+```js
+alert( 1 && 0 ); // 0
+alert( 1 && 5 ); // 5
+
+alert( 1 && 2 && null && 3 ); // null
+alert( 1 && 2 && 3 ); // 3, the last one
+```
+
+AND `&&` has higher precedence than OR `||`. Also, do not replace `if` with `||` or `&&`
+
+### ! (NOT)
+
+The NOT operator converts the operand to a boolean then takes the inverse.
+
+```js
+let a = true;
+let result = !a; // false
+```
+
+A double NOT `!!` is used to convert a value to boolean type. The first NOT converts and returns the inverse boolean, and the second NOT inverses it again.
+
+```js
+alert( !!"non-empty string" ); // true
+alert( !!null ); // false
+
+alert( Boolean("non-empty string") ); // same thing
+alert( Boolean(null) );
+```
+
+The NOT `!` operator has the highest precedence of all logical operators (before `&&` or `||`).
 
 ### Exercises
 
+#### What's the result of OR?
 
+What is the code below going to output?
+
+```js
+alert( null || 2 || undefined );
+```
+
+#### What's the result of OR'ed alerts?
+
+What will the code below output?
+
+```js
+alert( alert(1) || 2 || alert(3) );
+```
+
+#### What is the result of AND?
+
+What is this code going to show?
+
+```js
+alert( 1 && null && 2 );
+```
+
+#### What is the result of AND'ed alerts?
+
+What will this code show?
+
+```js
+alert( alert(1) && alert(2) );
+```
+
+#### The result of OR AND OR
+
+What will the result be?
+
+```js
+alert( null || 2 && 3 || 4 );
+```
+
+#### Check the range between
+
+Write an `if` condition to check that `age` is between `14` and `90` inclusively.
+
+“Inclusively” means that `age` can reach the edges `14` or `90`.
+
+#### Check the range outside
+
+Write an `if` condition to check that `age` is NOT between `14` and `90` inclusively.
+
+Create two variants: the first one using NOT `!`, the second one – without it.
+
+#### A question about "if"
+
+Which of these `alert`s are going to execute?
+
+What will the results of the expressions be inside `if(...)`?
+
+```js
+if (-1 || 0) alert( 'first' );
+if (-1 && 0) alert( 'second' );
+if (null || -1 && 1) alert( 'third' );
+```
+
+#### Check the login
+
+Write the code which asks for a login with `prompt`.
+
+If the visitor enters `"Admin"`, then `prompt` for a password, if the input is an empty line or *Esc* – show “Canceled”, if it’s another string – then show “I don’t know you”.
+
+The password is checked as follows:
+
+- If it equals “TheMaster”, then show “Welcome!”,
+- Another string – show “Wrong password”,
+- For an empty string or cancelled input, show “Canceled”
+
+The schema:
+
+![alt text](assets/img/schema.png)
 
 ### Related Files
 
-
+- js/logicalops.js
+- logicalops.html
 
 ## 2.12 Nullish Coalescing Operator '??'
