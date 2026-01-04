@@ -1330,3 +1330,31 @@ The schema:
 - logicalops.html
 
 ## 2.12 Nullish Coalescing Operator '??'
+
+When an expression is `a ?? b`, it means:
+
+- if `a` is defined, then `a` is the result.
+- if `a` isn't defined, then `b` is the result.
+
+This is just a nice syntax to return the first argument if it is not null/undefined, otherwise the second.
+
+It is similar to this:
+
+```js
+result = (a !== null && a !== undefined) ? a : b;
+```
+
+The `??` operator has very low precedence, so it's recommended to add parentheses when using it
+(thus, forbidden to use it with `||` or `&&` without parentheses.)
+
+## 2.13 Loops: while and for
+
+
+
+
+### Exercises
+
+
+
+### Related Files
+
