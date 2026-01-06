@@ -1349,12 +1349,190 @@ The `??` operator has very low precedence, so it's recommended to add parenthese
 
 ## 2.13 Loops: while and for
 
+Loops are used to repeat the same code multiple times.
 
+### The "while" Loop
 
+The `while` loop iterates always while its condition is truthy:
+
+```js
+// Syntax
+while (condition) {
+  // "loop body"
+}
+
+let i = 0;
+while (i < 3) { // shows 0, then 1, then 2
+  alert( i );
+  i++;
+}
+```
+
+### The "do...while" Loop
+
+The `do..while` loop is similar to the `while` loop but it checks the condition after an iteration.
+
+```js
+do {
+  // loop body
+} while (condition);
+```
+
+It is useful if you want to execute the loop body at least once.
+
+### The "for" Loop
+
+The `for` loop looks like this:
+
+```js
+for (begin; condition; step) {
+  // loop body
+}
+```
+
+The `begin` executes once at the start. The `condition` is checked before every loop iteration, stopping the loop if false.
+The `loop body` runs for the iteration. The `step` executes after each iteration.
+
+Any of the parts can be skipped if you want.
+
+`for` loops are best when you know how much you'll iterate a `loop body` for.
+
+### Breaking the Loop
+
+We can force to exit out of a loop using `break`. It is powerful in infinite loops, e.g. `while(true)`, where you'd want
+to exit during the iteration.
+
+```js
+let sum = 0;
+
+while (true) {
+  let value = +prompt("Enter a number", '');
+  if (!value) break;
+  sum += value;
+}
+alert( "Sum: " + sum );
+```
+
+### Continue to the Next Iteration
+
+Instead of stopping the whole loop with `break`, `continue` can be used to skip the current iteration and starting the next.
+
+```js
+for (let i = 0; i < 10; i++) {
+  if (i % 2 == 0) continue;
+
+  alert(i); // 1, then 3, 5, 7, 9
+}
+```
+
+### Labels for break/continue
+
+Labels can be used to break out of nested loops (instead of using a variable).
+
+```js
+outer: for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 3; j++) {
+    let input = prompt(`Value at coords (${i},${j})`,'');
+    if (!input) break outer;
+
+    // do something with the value
+  }
+}
+
+alert("Done!");
+```
+
+Labels do not allow "jumping" to anywhere in the code.
 
 ### Exercises
 
+#### Last loop value
 
+What is the last value alerted by this code? Why?
+
+```js
+let i = 3;
+
+while (i) {
+  alert( i-- );
+}
+```
+
+#### Which values does the while loop Show?
+
+For every loop iteration, write down which value it outputs and then compare it with the solution.
+
+Both loops `alert` the same values, or not?
+
+- The prefix form `++i`:
+
+```js
+let i = 0;
+while (++i < 5) alert( i );
+```
+
+- The postfix form `i++`:
+
+```js
+let i = 0;
+while (i++ < 5) alert( i );
+```
+
+#### Which values get shown by the "for" loop?
+
+For each loop write down which values it is going to show. Then compare with the answer.
+
+Both loops `alert` same values or not?
+
+- The postfix form:
+
+```js
+for (let i = 0; i < 5; i++) alert( i );
+```
+
+- The prefix form:
+
+```js
+for (let i = 0; i < 5; ++i) alert( i );
+```
+
+#### Output even numbers in the loop
+
+Use the `for` loop to output even numbers from `2` to `10`.
+
+#### Replace "for" with "while"
+
+Rewrite the code changing the `for` loop to `while` without altering its behavior (the output should stay same).
+
+```js
+for (let i = 0; i < 3; i++) {
+  alert( `number ${i}!` );
+}
+```
+
+#### Repeat until the input is correct
+
+Write a loop which prompts for a number greater than `100`. If the visitor enters another number – ask them to input again.
+
+The loop must ask for a number until either the visitor enters a number greater than `100` or cancels the input/enters an empty line.
+
+Here we can assume that the visitor only inputs numbers. There’s no need to implement a special handling for a non-numeric input in this task.
+
+#### Output prime numbers
+
+An integer number greater than `1` is called a *prime* if it cannot be divided without a remainder by anything except `1` and itself.
+
+In other words, `n > 1` is a prime if it can’t be evenly divided by anything except `1` and `n`.
+
+For example, `5` is a prime, because it cannot be divided without a remainder by `2`, `3` and `4`.
+
+**Write the code which outputs prime numbers in the interval from `2` to `n`.**
+
+For `n = 10` the result will be `2,3,5,7`.
+
+P.S. The code should work for any `n`, not be hard-tuned for any fixed value.
 
 ### Related Files
 
+- js/loops.js
+- loops.html
