@@ -1536,3 +1536,117 @@ P.S. The code should work for any `n`, not be hard-tuned for any fixed value.
 
 - js/loops.js
 - loops.html
+
+## 2.14 The "switch" Statement
+
+A `switch` statement can replace multiple `if` checks.
+
+```js
+switch(x) {
+  case 'value1': // if (x === 'value1')
+    ...
+    [break]
+
+  case 'value2': // if (x === 'value2')
+    ...
+    [break]
+  
+  default:
+    ...
+    [break]
+}
+```
+
+It checks strict equality of `x` to each value. If it matches none, then the `default` case runs.
+`break` is needed in each case because it runs in succession, into the next case. `break` will *break* out of the switch statement.
+
+We can also group cases:
+
+```js
+let a = 3;
+
+switch (a) {
+  case 4:
+    alert('Right!');
+    break;
+
+  case 3: // (*) grouped two cases
+  case 5:
+    alert('Wrong!');
+    alert("Why don't you take a math class?");
+    break;
+
+  default:
+    alert('The result is strange. Really.');
+}
+```
+
+Types also matter, because it's strict equality:
+
+```js
+let arg = prompt("Enter a value?");
+switch (arg) {
+  case '0':
+  case '1':
+    alert( 'One or zero' );
+    break;
+
+  case '2':
+    alert( 'Two' );
+    break;
+
+  case 3:
+    alert( 'Never executes!' );
+    break;
+  default:
+    alert( 'An unknown value' );
+}
+```
+
+### Exercises
+
+#### Rewrite the "switch" into an "if"
+
+Write the code using `if..else` which would correspond to the following `switch`:
+
+```js
+switch (browser) {
+  case 'Edge':
+    alert( "You've got the Edge!" );
+    break;
+
+  case 'Chrome':
+  case 'Firefox':
+  case 'Safari':
+  case 'Opera':
+    alert( 'Okay we support these browsers too' );
+    break;
+
+  default:
+    alert( 'We hope that this page looks ok!' );
+}
+```
+
+#### Rewrite "if" into "switch"
+
+Rewrite the code below using a single `switch` statement:
+
+```js
+let a = +prompt('a?', '');
+
+if (a == 0) {
+  alert( 0 );
+}
+if (a == 1) {
+  alert( 1 );
+}
+
+if (a == 2 || a == 3) {
+  alert( '2,3' );
+}
+```
+
+### Related Files
+
+- js/switch.js
+- switch.html
