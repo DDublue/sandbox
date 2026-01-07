@@ -1650,3 +1650,277 @@ if (a == 2 || a == 3) {
 
 - js/switch.js
 - switch.html
+
+## 2.15 Functions
+
+Functions are used to perform repeated actions. `prompt`, `alert`, and `confirm` are examples of functions that we've been using so far.
+We make them so we don't have to rewrite the same code.
+
+### Function Declaration
+
+To create a function, we do this:
+
+```js
+function name(parameter1, parameter2, ..., parameterN) {
+  // body
+}
+
+function showMessage() {
+  alert("Hello everyone!");
+}
+```
+
+Then, we can call it whenever we want:
+
+```js
+showMessage();
+showMessage();
+```
+
+### Local Variables
+
+Functions can contain declared variables only visible within itself:
+
+```js
+function showMessage() {
+  let message = "Hello, I'm JavaScript!"; // local variable
+
+  alert( message );
+}
+
+showMessage(); // "Hello, I'm JavaScript";
+
+alert( message ); // <-- Error! It is a local variable to showMessage()
+```
+
+### Outer Variables
+
+Functions can also access outside variables, but only if there is no local variable with the same name:
+
+```js
+let userName = 'John';
+
+function showMessage() {
+  let userName = "Bob"; // declare a local variable
+
+  let message = 'Hello, ' + userName; // Bob
+  alert(message);
+}
+
+// the function will create and use its own userName
+showMessage();
+
+alert( userName ); // John, unchanged, the function did not access the outer variable
+```
+
+It is good practice to minimize variable "global-ness".
+
+### Parameters
+
+We can pass values through a function for it to use:
+
+```js
+function showMessage(from, text) {
+
+  from = '*' + from + '*'; // make "from" look nicer
+
+  alert( from + ': ' + text );
+}
+
+let from = "Ann";
+
+showMessage(from, "Hello"); // *Ann*: Hello
+
+// the value of "from" is the same, the function modified a local copy
+alert( from ); // Ann
+```
+
+### Default Values
+
+A parameter can have a default value if there is no argument passed:
+
+```js
+function showMessage(from, text = "no text given") {
+  alert( from + ": " + text );
+}
+
+showMessage("Ann"); // Ann: no text given
+```
+
+This is also possible:
+
+```js
+function showMessage(from, text = anotherFunction()) {
+  // anotherFunction() only executed if no text given
+  // its result becomes the value of text
+}
+```
+
+### Returning a Value
+
+Functions can also return a value after its execution.
+
+```js
+function sum(a, b) {
+  return a + b;
+}
+```
+
+It can have more than one `return` statement, or even return nothing (which *returns* `undefined`):
+
+```js
+function checkAge(age) {
+  if (age >= 18) {
+    return true;
+  } else {
+    return confirm("Do you have permission?");
+  }
+}
+
+function showMovie(age) {
+  if (!checkAge(age)) {
+    return;
+  }
+
+  alert( "Showing you the movie" );
+}
+```
+
+Remember to not add a newline for a `return` statement due to JavaScript's implicit semicolons.
+
+### Naming a Function
+
+A function's name should reflect what it does. It should be a verb (usually), brief, and accurate of its function.
+
+```js
+// Examples
+showMessage(..)     // shows a message
+getAge(..)          // returns the age (gets it somehow)
+calcSum(..)         // calculates a sum and returns the result
+createForm(..)      // creates a form (and usually returns it)
+checkPermission(..) // checks a permission, returns true/false
+```
+
+A function should also do what its name does i.e. one action only.
+
+### Functions == Comments
+
+If there are multiple actions happening within one function, it is best to separate the other actions into their own functions.
+
+```js
+function showPrimes(n) {
+  nextPrime: for (let i = 2; i < n; i++) {
+
+    for (let j = 2; j < i; j++) {
+      if (i % j == 0) continue nextPrime;
+    }
+
+    alert( i ); // a prime
+  }
+}
+```
+
+Instead of the above, it's best like this, for readability and modularity:
+
+```js
+function showPrimes(n) {
+
+  for (let i = 2; i < n; i++) {
+    if (!isPrime(i)) continue;
+
+    alert(i);  // a prime
+  }
+}
+
+function isPrime(n) {
+  for (let i = 2; i < n; i++) {
+    if ( n % i == 0) return false;
+  }
+  return true;
+}
+```
+
+### Exercises
+
+#### Is "else" required?
+
+The following function returns `true` if the parameter `age` is greater than `18`.
+
+Otherwise it asks for a confirmation and returns its result:
+
+```js
+function checkAge(age) {
+  if (age > 18) {
+    return true;
+  } else {
+    // ...
+    return confirm('Did parents allow you?');
+  }
+}
+```
+
+Will the function work different if `else` is removed?
+
+```js
+function checkAge(age) {
+  if (age > 18) {
+    return true;
+  }
+  // ...
+  return confirm('Did parents allow you?');
+}
+```
+
+Is there any difference in the behavior of these two variants?
+
+#### Rewrite the function using '?' or '||'
+
+The following function returns `true` if the parameter `age` is greater than `18`.
+
+Otherwise it asks for a confirmation and returns its result.
+
+```js
+function checkAge(age) {
+  if (age > 18) {
+    return true;
+  } else {
+    return confirm('Did parents allow you?');
+  }
+}
+```
+
+Rewrite it, to perform the same, but without `if`, in a single line.
+
+Make two variants of `checkAge`:
+
+- Using a question mark operator `?`
+- Using OR `||`
+
+#### Function min(a,b)
+
+Write a function `min(a,b)` which returns the least of two numbers `a` and `b`.
+
+For instance:
+
+```js
+min(2, 5) == 2
+min(3, -1) == -1
+min(1, 1) == 1
+```
+
+#### Function pow(x,n)
+
+Write a function `pow(x,n)` that returns `x` in power `n`. Or, in other words, multiplies `x` by itself `n` times and returns the result.
+
+```js
+pow(3, 2) = 3 * 3 = 9
+pow(3, 3) = 3 * 3 * 3 = 27
+pow(1, 100) = 1 * 1 * ...* 1 = 1
+```
+
+Create a web-page that prompts for `x` and `n`, and then shows the result of `pow(x,n)`.
+
+### Related Files
+
+- js/functions.js
+- functions.html
