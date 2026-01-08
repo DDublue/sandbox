@@ -1937,3 +1937,58 @@ let sayHi = function() {
 
 Function Declarations are processed before the code block is executed, visible everywhere.
 Function Expressions are created when the execution flow reaches them.
+
+## 2.17 Arrow Functions, the Basics
+
+Arrow functions are an alternative way to create functions. It accepts arguments, evaluates the right expression with them,
+then returns the result.
+
+```js
+let func = (arg1, arg2, ..., argN) => expression;
+
+// Example
+let sum = (a, b) => a + b;
+
+alert( sum(1, 2) );
+```
+
+If there's one argument, then parentheses can be omitted. If there's none, they must be present:
+
+```js
+let double = n => n * 2;
+
+let sayHi = () => alert("Hello!");
+```
+
+Arrow functions can be multiline, but they must `return` something:
+
+```js
+let sum = (a, b) => {
+  let result = a + b;
+  return result;
+}
+
+alert( sum(1, 2) ); // 3
+```
+
+### Exercises
+
+#### Rewrite with arrow functions
+
+```js
+function ask(question, yes, no) {
+  if (confirm(question)) yes();
+  else no();
+}
+
+ask(
+  "Do you agree?",
+  function() { alert("You agreed."); },
+  function() { alert("You canceled the execution."); }
+);
+```
+
+### Related Files
+
+- js/arrowfunctions.js
+- arrowfunctions.html
