@@ -1924,3 +1924,16 @@ Create a web-page that prompts for `x` and `n`, and then shows the result of `po
 
 - js/functions.js
 - functions.html
+
+## 2.16 Function Expression
+
+We can create functions in the middle of any expression:
+
+```js
+let sayHi = function() {
+  alert( "Hello" );
+}
+```
+
+Function Declarations are processed before the code block is executed, visible everywhere.
+Function Expressions are created when the execution flow reaches them.
