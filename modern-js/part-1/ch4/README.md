@@ -230,6 +230,151 @@ P.S. Use `typeof` to check for a number here.
 
 ## 4.2 Object References and Copying
 
+When copying values, it is different for objects vs. primitives e.g. strings. For example:
+
+```js
+let message = "Hello!";
+let phrase = message;
+```
+
+Both `message` and `phrase` store their own copy of `"Hello!"`.
+
+However, with objects, it stores by reference. So, when one variable tries to "copy" another variable
+that stores an object, it is actually pointing to that same object instead of having its own copy.
+
+```js
+let user = { name: "John" };
+
+let admin = user; // 'admin' points to the same object as 'user'; there's still only one object existing
+```
+
+This is what it looks like under the hood:
+
+![alt text](assets/img/objref.png)
+
+### Comparison by Reference
+
+Two objects are equal only if they are the same object. Different objects will
+obviously be not equal.
+
+```js
+let a = {};
+let b = a;
+
+alert( a == b );
+alert( a === b ); // true, both variables reference the same object
+
+let c = {};
+
+alert( a == c ); // false, they both reference their own independent objects
+```
+
+`const` variables with objects can still be modified because it only keeps the
+variable `const` to that object. The insides are still changeable.
+
+```js
+const user = {
+  name: "John"
+}
+
+user.name = "Pete";
+
+alert(user.name); // Pete
+```
+
+### Clonging and Merging, Object.assign
+
+We can clone new objects in a certain way:
+
+```js
+let user = {
+  name: "John",
+  age: 30
+};
+
+let clone = {}; // the new empty object
+
+// let's copy all user properties into it
+for (let key in user) {
+  clone[key] = user[key];
+}
+```
+
+Above, `user` and `clone` are now independent objects and do not affect each other.
+
+We can also use the method `Object.assign` by:
+
+```js
+Object.assign(dest, ...sources);
+```
+
+It copies the properties of all source objects into the target `dest`, and then returns
+it as the result.
+
+For example:
+
+```js
+let user = {
+  name: "John",
+  age: 30
+};
+
+let clone = Object.assign({}, user);
+
+alert(clone.name); // John
+alert(clone.age); // 30
+```
+
+### Nested Cloning
+
+So far, we have only talked about primitive properties. But what about properties that are
+objects?
+
+If we try to copy, we will see that nested objects will be shared even though there'd be
+independent outer objects:
+
+```js
+let user = {
+  name: "John",
+  sizes: {
+    height: 182,
+    width: 50
+  },
+};
+
+let clone = Object.assign({}, user);
+
+alert( user.sizes === clone.sizes ); // true, same object
+```
+
+To fix nested object cloning, we can call `structuredClone(object)`, which will clone `object`
+will all nested properties:
+
+```js
+let user = {
+  name: "John",
+  sizes: {
+    height: 182,
+    width: 50
+  }
+};
+
+let clone = structuredClone(user);
+
+alert( user.sizes === clone.sizes ); // false, different objects
+```
+
+`structuredClone(object)` can clone most data types like objects and aarays as well as circular
+references.
+
+However, it cannot clone function properties:
+
+```js
+// error
+structuredClone({
+  f: function() {}
+});
+```
 
 ## 4.3 Garbage Collection
 
