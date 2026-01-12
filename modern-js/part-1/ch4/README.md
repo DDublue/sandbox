@@ -282,7 +282,7 @@ user.name = "Pete";
 alert(user.name); // Pete
 ```
 
-### Clonging and Merging, Object.assign
+### Cloning and Merging, Object.assign
 
 We can clone new objects in a certain way:
 
@@ -378,9 +378,22 @@ structuredClone({
 
 ## 4.3 Garbage Collection
 
+Memory management in JavaScript is automatically. The "garbage collection" will remove any unwanted data/variables/etc.
+whenever it's not used anymore.
+
+The main points are:
+
+- Garbage collection is automatic. It cannot be forced or prevented.
+- Objects are retained in memory while they are reachable.
+- Being referenced is not the same as being reachable (from a root).
 
 ## 4.4 Object Methods, "this"
 
+Objects can have methods, to be run when called. For example:
+
+```js
+
+```
 
 ## 4.5 Constructor, Operator "new"
 
