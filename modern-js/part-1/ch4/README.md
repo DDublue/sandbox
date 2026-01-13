@@ -392,8 +392,137 @@ The main points are:
 Objects can have methods, to be run when called. For example:
 
 ```js
+let user = {
+  name: "John",
+  age: 30
+};
 
+user.sayHi = function() {
+  alert("Hello!");
+}
+
+user.sayHi(); // Hello!
 ```
+
+We can also do it like in these ways:
+
+```js
+let user = {
+  // ...
+};
+
+function sayHi() {
+  alert("Hello!");
+}
+
+user.sayHi = sayHi;
+
+// or...
+
+user = {
+  sayHi: function() {
+    alert("Hello");
+  }
+};
+
+// preferred shorthand method
+user = {
+  sayHi() {
+    alert("Hello");
+  }
+};
+```
+
+### "this" in methods
+
+We can use `this` in an object to refer to itself. For example:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+
+  sayHi() {
+    alert(this.name);
+  }
+
+};
+```
+
+It is also possible to use the variable name instead of `this`, but it is not recommended:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+
+  sayHi() {
+    alert( user.name ); // leads to an error
+  }
+
+};
+
+
+let admin = user;
+user = null; // overwrite to make things obvious
+
+admin.sayHi(); // TypeError: Cannot read property 'name' of null
+```
+
+### "this" is not bound
+
+`this` can be used in any function. So, if a function has `this` and it's assigned,
+it will refer to the assigned object:
+
+```js
+let user = { name: "John" };
+let admin = { name: "Admin" };
+
+function sayHi() {
+  alert( this.name );
+}
+
+// use the same function in two objects
+user.f = sayHi;
+admin.f = sayHi;
+
+// these calls have different this
+// "this" inside the function is the object "before the dot"
+user.f(); // John  (this == user)
+admin.f(); // Admin  (this == admin)
+
+admin['f'](); // Admin (dot or square brackets access the method – doesn't matter)
+```
+
+### Arrow functions have no "this"
+
+If an arrow function tries to use `this` it will take `this` from the outer "normal" function.
+For example:
+
+```js
+let user = {
+  firstName: "Ilya",
+  sayHi() {
+    let arrow = () => alert(this.firstName);
+    arrow();
+  }
+};
+
+user.sayHi(); // Ilya
+```
+
+### Exercises
+
+#### Using "this" in object literal
+
+#### Create a calculator
+
+#### Chaining
+
+### Related Files
+
+- js/objectmethods.js
+- objectmethods.html
 
 ## 4.5 Constructor, Operator "new"
 
