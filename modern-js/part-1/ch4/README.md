@@ -593,6 +593,166 @@ ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
 
 ## 4.5 Constructor, Operator "new"
 
+We can create multiple instances of the same object by using *constructor functions* and the `"new"` operator.
+
+### Constructor Functions
+
+These are regular functions but with two conventions:
+
+1. They are named with capital letter first.
+2. They should be executed only with `"new"` operator.
+
+For example:
+
+```js
+function User(name) {
+  this.name = name;
+  this.isAdmin = false;
+}
+
+let user = new User("Jack");
+
+alert(user.name); // Jack
+alert(user.isAdmin); // false
+```
+
+This is what happens with `new`:
+
+1. A new empty object is created and assigned to `this`.
+2. The function body executes. Usually it modifies `this`, adds new properties to it.
+3. The value of `this` is returned.
+
+```js
+function User(name) {
+  // this = {}; (implicitly)
+
+  // add properties to this
+  this.name = name;
+  this.isAdmin = false;
+
+  // return this; (implicitly)
+}
+```
+
+If you do `new function() {...}`, it's a single-time use because the constructor function
+is not saved anywhere.
+
+### Return from Constructors
+
+Constructors don't have `return` usually, but it can:
+
+- if `return` is called with an object, it returns that instead of `this`.
+- if `return` is called with a primitive, it's ignored.
+
+```js
+function BigUser() {
+
+  this.name = "John";
+
+  return { name: "Godzilla" };  // <-- returns this object
+}
+alert( new BigUser().name );  // Godzilla, got that object
+
+function SmallUser() {
+
+  this.name = "John";
+
+  return; // <-- returns this
+}
+alert( new SmallUser().name );  // John
+```
+
+### Methods in Constructor
+
+We can add `this` to methods. For example, in `User`:
+
+```js
+function User(name) {
+  this.name = name;
+
+  this.sayHi = function() {
+    alert( "My name is: " + this.name );
+  };
+}
+
+let john = new User("John");
+
+john.sayHi(); // My name is: John
+
+/*
+john = {
+   name: "John",
+   sayHi: function() { ... }
+}
+*/
+```
+
+*Classes* are more complex objects, to be covered later.
+
+### Exercises
+
+#### Two functions – one object
+
+Is it possible to create functions `A` and `B` so that `new A() == new B()`?
+
+```js
+function A() { ... }
+function B() { ... }
+
+let a = new A();
+let b = new B();
+
+alert( a == b ); // true
+```
+
+If it is, then provide an example of their code.
+
+#### Create new Calculator
+
+Create a constructor function `Calculator` that creates objects with 3 methods:
+
+- `read()` prompts for two values and saves them as object properties with names `a` and `b` respectively.
+- `sum()` returns the sum of these properties.
+- `mul()` returns the multiplication product of these properties.
+
+For instance:
+
+```js
+let calculator = new Calculator();
+calculator.read();
+
+alert( "Sum=" + calculator.sum() );
+alert( "Mul=" + calculator.mul() );
+```
+
+#### Create new Accumulator
+
+Create a constructor function `Accumulator(startingValue)`.
+
+Object that it creates should:
+
+- Store the "current value" in the property `value`. The starting value is set to the argument
+of the constructor `startingValue`.
+- The `read()` method should use `prompt` to read a new number and add it to `value`.
+
+In other words, the `value` property is the sum of all user-entered values with the inital value
+`startingValue`.
+
+Here's the demo of the code:
+
+```js
+let accumulator = new Accumulator(1); // initial value 1
+
+accumulator.read(); // adds the user-entered value
+accumulator.read(); // adds the user-entered value
+
+alert(accumulator.value); // shows the sum of these values
+```
+
+### Related Files
+
+- js/constructor.js
+- constructor.html
 
 ## 4.6 Optional Chaining '?.'
 
