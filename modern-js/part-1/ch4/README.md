@@ -756,8 +756,21 @@ alert(accumulator.value); // shows the sum of these values
 
 ## 4.6 Optional Chaining '?.'
 
+`?.` is a safe way to access nested object properties.
+
+### Summary
+
+This `?.` syntax has three forms:
+
+1. `obj?.prop` - returns `obj.prop` if `obj` exists, otherwise `undefined`.
+2. `obj?.[prop]` - returns `obj.[prop]` if `obj` exists, otherwise `undefined`.
+3. `obj.method?.()` - calls `obj.method()` if `obj.method` exists, otherwise returns `undefined`.
+
+We should use this carefully, only where it's acceptable, according to our code logic, that the left
+part doesn't exist.
 
 ## 4.7 Symbol Type
+
 
 
 ## 4.8 Object to Primitive Conversion
